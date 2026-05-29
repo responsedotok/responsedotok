@@ -9,7 +9,7 @@
     "lint": "biome check --write",
     "format": "biome format --write",
     "test": "vitest",
-    "migrate": "node --env-file=.env.local src/scripts/migrate.mjs"
+    "migrate": "node --env-file=.env.local src/db/migrate.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "2.0.1",
