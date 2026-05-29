@@ -1,0 +1,36 @@
+{
+  "name": "responsedotok",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "biome check --write",
+    "format": "biome format --write",
+    "test": "vitest",
+    "migrate": "node --env-file=.env.local src/scripts/migrate.mjs"
+  },
+  "dependencies": {
+    "@vercel/analytics": "2.0.1",
+    "@vercel/blob": "2.4.0",
+    "argon2": "0.44.0",
+    "next": "16.2.6",
+    "postgres": "3.4.9",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.15",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "dotenv": "17.4.2",
+    "jsdom": "29.1.1",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vitest": "4.1.7"
+  }
+}

@@ -1,0 +1,17 @@
+import { resolve } from 'node:path';
+import { defineConfig } from 'vitest/config';
+
+export default defineConfig({
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: ['src/test/setup.env.ts', 'src/test/setup.test.ts'],
+    include: ['src/test/**/*.test.{ts,tsx}'],
+    exclude: ['node_modules', '.next']
+  },
+  resolve: {
+    alias: {
+      '@': resolve(import.meta.dirname, 'src')
+    }
+  }
+});
