@@ -11,7 +11,7 @@ import {
 import type { AuthContextValue } from '@/lib/types/auth-context-value';
 import type {  LastCall }  from '@/lib/types/last-call';
 import { PublicUser } from '@/lib/types/public-user';
-import { api } from '@/utils/api';
+import { _request } from '@/utils/_request';
 import { SignupInput } from '@/lib/types/signup-input';
 import type { LoginInput } from '@/lib/types/login-input';
 
@@ -30,17 +30,17 @@ export function AuthProvider({
   const [lastCall, setLastCall] = useState<LastCall>(null);
 
   const refresh = useCallback(async () => {
-    const res = await api<PublicUser>('/api/auth/me');
+    const res = await _request<PublicUser>('/_request/auth/me');
     setUser(res.ok ? res.body as PublicUser : null)
   }, []);
 
   const signup = useCallback(async (input: SignupInput) => {
-     const res = await api<PublicUser>('/api/auth/signup', {
+     const res = await _request<PublicUser>('/_request/auth/signup', {
       method: 'POST',
       body: JSON.stringify(input),
     });
     setLastCall({
-      label: 'POST /api/auth/signup',
+      label: 'POST /_request/auth/signup',
       status: res.status,
       body: res.body
     });
@@ -49,12 +49,12 @@ export function AuthProvider({
   }, []);
 
   const login = useCallback(async (input: LoginInput) => {
-    const res = await api<PublicUser>('/api/auth/login', {
+    const res = await _request<PublicUser>('/_request/auth/login', {
       method: 'POST',
       body: JSON.stringify(input),
     });
     setLastCall({
-      label: 'POST /api/auth/login',
+      label: 'POST /_request/auth/login',
       status: res.status,
       body: res.body
     });
@@ -64,11 +64,11 @@ export function AuthProvider({
 
 
   const logout = useCallback(async () => {
-    const res = await api<{ ok: true }>('/api/auth/logout', {
+    const res = await _request<{ ok: true }>('/_request/auth/logout', {
       method: 'POST',
     });
     setLastCall({
-      label: 'POST /api/auth/logout',
+      label: 'POST /_request/auth/logout',
       status: res.status,
       body: res.body
     });

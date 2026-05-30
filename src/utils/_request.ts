@@ -7,7 +7,7 @@ import { API_URL } from '@/lib/constants/constants';
  * @param init The fetch request initialization options.
  * @returns The API result.
  */
-export async function api<T = unknown>(
+export async function _request<T = unknown>(
   path: string,
   init: RequestInit = {},
 ): Promise<ApiResult<T>> {
