@@ -48,9 +48,9 @@ async function migrate() {
         continue;
       }
       console.info(`→  Applying migration: ${fi}`);
-      await sql.begin(async (t) => {
-        await t.file(join(MIGRATIONS_DIR, fi)).simple();
-        await t`
+      await sql.begin(async (tx) => {
+        await tx.file(join(MIGRATIONS_DIR, fi)).simple();
+        await tx`
           INSERT INTO _migrations (filename)
           VALUES (${fi})
         `;
