@@ -1,4 +1,4 @@
-import { z } from 'zod';
-import { presskitSchema } from '@/app/(app)/presskit/presskit-schema';
+import type { z } from 'zod';
+import type { presskitSchema } from '@/app/(app)/presskit/presskit-schema';
 
 export type CreateKitInput = z.input<typeof presskitSchema>;

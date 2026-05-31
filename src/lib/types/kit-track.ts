@@ -1,4 +1,3 @@
-
 export type KitTrack = {
   id: string;
   blob_url: string;

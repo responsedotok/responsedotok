@@ -1,4 +1,3 @@
-
 export type KitListItem = {
   token: string;
   artist_name: string;
