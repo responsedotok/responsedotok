@@ -22,7 +22,7 @@ export default function SignupPage() {
           Create an account
         </h1>
         <p className="max-w-xs leading-relaxed text-text-800">
-         Share the private link & let your work speak.
+          Share the private link & let your work speak.
         </p>
       </header>
 

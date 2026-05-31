@@ -22,9 +22,11 @@ export default async function AuthLayout({
           <LogoImage className="w-2/3 max-w-xs select-none" />
         </div>
 
-        <h3 className="max-w-sm text-primary-200 leading-relaxed">Presskits for musicians.</h3>
+        <h3 className="max-w-sm text-primary-200 leading-relaxed">
+          Presskits for musicians.
+        </h3>
         <p className="max-w-xs leading-relaxed text-primary-200">
-         Share the private link & let your work speak.
+          Share the private link & let your work speak.
         </p>
       </aside>
 

@@ -17,7 +17,7 @@ export default function LoginPage() {
           Welcome back
         </h1>
         <p className="max-w-sm leading-relaxed text-text-800">
-         Share the private link & let your work speak.
+          Share the private link & let your work speak.
         </p>
       </header>
 
