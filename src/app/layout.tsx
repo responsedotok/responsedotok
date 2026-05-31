@@ -2,8 +2,8 @@ import { Analytics } from '@vercel/analytics/next';
 import type { Metadata } from 'next';
 import { Crimson_Pro, SUSE } from 'next/font/google';
 import './globals.css';
-import { AuthProvider } from '@/lib/auth/contexts/provider';
 import { getCurrentUser } from '@/lib/auth//users/get-current-user';
+import { AuthProvider } from '@/lib/auth/contexts/provider';
 
 const suseSans = SUSE({
   variable: '--font-suse-sans',
