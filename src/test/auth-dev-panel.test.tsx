@@ -17,14 +17,14 @@ describe('AuthDevPanel', () => {
   test('shows the last call label, status, and pretty-printed body', () => {
     h.useAuth.mockReturnValue({
       lastCall: {
-        label: 'POST /_request/auth/login',
+        label: 'POST /api/auth/login',
         status: 401,
         body: { error: 'Invalid credentials' },
       },
     });
     render(<AuthDevPanel />);
 
-    expect(screen.getByText('POST /_request/auth/login')).toBeInTheDocument();
+    expect(screen.getByText('POST /api/auth/login')).toBeInTheDocument();
     expect(screen.getByText('401')).toBeInTheDocument();
     expect(screen.getByText(/Invalid credentials/)).toBeInTheDocument();
   });

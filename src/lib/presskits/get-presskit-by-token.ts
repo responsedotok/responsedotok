@@ -7,7 +7,7 @@ import type { KitTrack } from '../types/kit-track';
  * @param token The token of the press kit to retrieve.
  * @returns The press kit with its tracks, or null if not found or revoked.
  */
-export async function getKitByToken(
+export async function getPresskitByToken(
   token: string,
 ): Promise<KitWithTracks | null> {
   const [kit] = await sql<Omit<KitWithTracks, 'tracks'>[]>`

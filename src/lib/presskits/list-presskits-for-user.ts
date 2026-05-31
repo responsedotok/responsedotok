@@ -6,7 +6,9 @@ import type { KitListItem } from '../types/kit-list-item';
  * @param userId The ID of the user whose press kits to list.
  * @returns An array of press kit list items.
  */
-export async function listKitsForUser(userId: string): Promise<KitListItem[]> {
+export async function listPresskitsForUser(
+  userId: string,
+): Promise<KitListItem[]> {
   const rows = await sql<KitListItem[]>`
     SELECT
       k.token, k.artist_name, k.recipient_name, k.recipient_org,

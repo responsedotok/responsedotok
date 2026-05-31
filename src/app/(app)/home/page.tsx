@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { CopyLinkButton } from '@/app/(app)/home/copy-link-button';
 import { getCurrentUser } from '@/lib/auth/users/get-current-user';
-import { listKitsForUser } from '@/lib/kits/list-kits-for-user';
+import { listPresskitsForUser } from '@/lib/presskits/list-presskits-for-user';
 
 export const dynamic = 'force-dynamic';
 
@@ -13,10 +13,10 @@ const dateFmt = new Intl.DateTimeFormat('en', {
 
 export default async function HomePage() {
   const user = await getCurrentUser();
-  const kits = user ? await listKitsForUser(user.id) : [];
+  const kits = user ? await listPresskitsForUser(user.id) : [];
 
   return (
-    <main className="mx-auto w-full max-w-3xl flex-1 px-6 py-12 font-sans">
+    <main className="mx-auto w-full max-w-3xl flex-1 px-6 py-12">
       <div className="mb-8 flex items-center justify-between gap-4">
         <h1 className="text-2xl font-semibold text-text-900">
           Your press kits

@@ -66,7 +66,7 @@ describe('AppShell', () => {
     await u.click(screen.getByRole('button', { name: 'Log out' }));
 
     expect(h.request).toHaveBeenCalledWith(
-      '/_request/auth/logout',
+      '/api/auth/logout',
       expect.objectContaining({ method: 'POST' }),
     );
     await waitFor(() => expect(push).toHaveBeenCalledWith('/auth/login'));

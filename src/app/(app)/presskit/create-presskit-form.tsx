@@ -38,7 +38,7 @@ export function CreatePresskitForm({
       for (const f of files) {
         const blob = await upload(f.name, f, {
           access: 'private',
-          handleUploadUrl: '/api/presskit/upload',
+          handleUploadUrl: '/api/presskits/upload',
           contentType: f.type || undefined,
         });
         tracks.push({

@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { RecordView } from '@/app/k/[token]/record-view';
-import { getKitByToken } from '@/lib/kits/get-kit-by-token';
-import { signTrackUrl } from '@/lib/kits/sign-track-url';
+import { getPresskitByToken } from '@/lib/presskits/get-presskit-by-token';
+import { signTrackUrl } from '@/utils/sign-track-url';
 
 // Always rendered fresh — the token is per-request and the page is uncached.
 export const dynamic = 'force-dynamic';
@@ -17,7 +17,7 @@ export default async function PresskitPage({
   params: Promise<{ token: string }>;
 }) {
   const { token } = await params;
-  const kit = await getKitByToken(token);
+  const kit = await getPresskitByToken(token);
   if (!kit) notFound();
 
   // Private blobs need a short-lived signed URL the recipient can stream.

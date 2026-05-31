@@ -28,17 +28,17 @@ export function AuthProvider({
   const [lastCall, setLastCall] = useState<LastCall>(null);
 
   const refresh = useCallback(async () => {
-    const res = await _request<PublicUser>('/_request/auth/me');
+    const res = await _request<PublicUser>('/api/auth/me');
     setUser(res.ok ? (res.body as PublicUser) : null);
   }, []);
 
   const signup = useCallback(async (input: SignupInput) => {
-    const res = await _request<PublicUser>('/_request/auth/signup', {
+    const res = await _request<PublicUser>('/api/auth/signup', {
       method: 'POST',
       body: JSON.stringify(input),
     });
     setLastCall({
-      label: 'POST /_request/auth/signup',
+      label: 'POST /api/auth/signup',
       status: res.status,
       body: res.body,
     });
@@ -47,12 +47,12 @@ export function AuthProvider({
   }, []);
 
   const login = useCallback(async (input: LoginInput) => {
-    const res = await _request<PublicUser>('/_request/auth/login', {
+    const res = await _request<PublicUser>('/api/auth/login', {
       method: 'POST',
       body: JSON.stringify(input),
     });
     setLastCall({
-      label: 'POST /_request/auth/login',
+      label: 'POST /api/auth/login',
       status: res.status,
       body: res.body,
     });
@@ -61,11 +61,11 @@ export function AuthProvider({
   }, []);
 
   const logout = useCallback(async () => {
-    const res = await _request<{ ok: true }>('/_request/auth/logout', {
+    const res = await _request<{ ok: true }>('/api/auth/logout', {
       method: 'POST',
     });
     setLastCall({
-      label: 'POST /_request/auth/logout',
+      label: 'POST /api/auth/logout',
       status: res.status,
       body: res.body,
     });

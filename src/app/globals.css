@@ -1,16 +1,17 @@
 @import "tailwindcss";
+@import "./defaults.css";
+@import "./fonts.css";
 @import "./colors.css";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: var(--color-background);
+  --foreground: var(--color-foreground);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-serif), serif;
-  font-weight: 300;
 }
 
 h1,
@@ -24,28 +25,78 @@ h5 {
 
 html {
   font-size: 100%;
-} /* 16px */
+}
 
 h1 {
-  font-size: 4.21rem; /* 67.36px */
+  display: block;
+  font-size: 3.158rem; /* 50.56px */
+  margin-top: 0.67rem;
+  margin-bottom: 0.67rem;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: 500;
 }
 
 h2 {
-  font-size: 3.158rem; /* 50.56px */
+  display: block;
+  font-size: 2.369rem; /* 37.92px */
+  margin-top: 0.83rem;
+  margin-bottom: 0.83rem;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: 400;
 }
 
 h3 {
-  font-size: 2.369rem; /* 37.92px */
+  display: block;
+  font-size: 1.777rem; /* 28.48px */
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: 500;
 }
 
 h4 {
-  font-size: 1.777rem; /* 28.48px */
+  display: block;
+  font-size: 1.333rem; /* 21.28px */
+  margin-top: 1.33rem;
+  margin-bottom: 1.33rem;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: 500;
 }
 
 h5 {
-  font-size: 1.333rem; /* 21.28px */
+  display: block;
+  font-size: 1.099rem; /* 17.58px */
+  margin-top: 1.67rem;
+  margin-bottom: 1.67rem;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: 500;
+}
+
+h6 {
+  display: block;
+  font-size: 1rem; /* 16px */
+  margin-top: 2.33rem;
+  margin-bottom: 2.33rem;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: 500;
 }
 
 small {
+  display: inline;
   font-size: 0.75rem; /* 12px */
+  margin-top: 0.34rem;
+  margin-bottom: 0.34rem;
+  font-weight: 400;
+}
+
+button:hover,
+a:hover {
+  cursor: pointer;
+  transform: scale(0.99);
 }
