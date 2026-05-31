@@ -1,6 +1,6 @@
 import { sql } from '@/db/pool';
-import type { PublicUserRow } from '@/lib/types/public-user-row';
 import { hashToken } from '@/lib/auth/tokens/hash-token';
+import type { PublicUserRow } from '@/lib/types/public-user-row';
 
 /**
  * Retrieves the user associated with the specified session token.
