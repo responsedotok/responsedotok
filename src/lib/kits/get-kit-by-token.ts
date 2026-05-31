@@ -1,6 +1,6 @@
-import type { KitWithTracks } from '@/lib/types/kit-with-tracks';
 import { sql } from '@/db/pool';
-import { KitTrack } from '../types/kit-track';
+import type { KitWithTracks } from '@/lib/types/kit-with-tracks';
+import type { KitTrack } from '../types/kit-track';
 
 /**
  * Retrieves a press kit by its token.
