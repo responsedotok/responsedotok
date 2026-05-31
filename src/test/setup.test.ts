@@ -1,6 +1,5 @@
 import { vi } from 'vitest';
 
-
 vi.mock('next/navigation', () => ({
   useRouter: vi.fn(() => ({
     push: vi.fn(),
@@ -11,7 +10,7 @@ vi.mock('next/navigation', () => ({
   usePathname: vi.fn(() => '/'),
   useSearchParams: vi.fn(() => new URLSearchParams()),
   useParams: vi.fn(() => ({})),
-  redirect: vi.fn()
+  redirect: vi.fn(),
 }));
 
 /**
@@ -26,7 +25,7 @@ if (typeof window !== 'undefined') {
       onchange: null,
       addEventListener: vi.fn(),
       removeEventListener: vi.fn(),
-      dispatchEvent: vi.fn()
-    }))
-  })
+      dispatchEvent: vi.fn(),
+    })),
+  });
 }
