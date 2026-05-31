@@ -28,13 +28,13 @@ vi.mock('next/headers', () => ({
 }));
 
 import { put } from '@vercel/blob';
-import { createPressKit } from '@/app/(app)/create/actions';
-import { recordView } from '@/app/k/[token]/actions';
-import { createSession } from '@/lib/auth/session';
-import { sql } from '@/lib/db';
-import { getKitByToken, listKitsForUser } from '@/lib/kits/queries';
-import { signTrackUrl } from '@/lib/kits/sign';
-
+import { createPresskit } from '@/app/(app)/presskit/create-presskit';
+import { recordView } from '@/db/record-view';
+import { createSession } from '@/lib/auth/sessions/create-session';
+import { sql } from '@/db/pool';
+import { getKitByToken } from '@/lib/kits/get-kit-by-token';
+import { signTrackUrl } from '@/lib/kits/sign-track-url';
+import { listKitsForUser } from '@/lib/kits/list-kits-for-user' 
 const hasSecrets = Boolean(
   process.env.DATABASE_URL && process.env.BLOB_READ_WRITE_TOKEN,
 );
@@ -81,7 +81,7 @@ describe.skipIf(!hasSecrets)('press kit data path (integration)', () => {
   });
 
   test('createPressKit persists a kit and its track', async () => {
-    const res = await createPressKit({
+    const res = await createPresskit({
       artist_name: 'The Testers',
       recipient_name: 'Jordan',
       recipient_org: 'XL Recordings',
@@ -110,7 +110,7 @@ describe.skipIf(!hasSecrets)('press kit data path (integration)', () => {
       mime_type: 'audio/mpeg',
       size_bytes: 14,
     };
-    const res = await createPressKit({
+    const res = await createPresskit({
       artist_name: 'X',
       recipient_name: 'Y',
       greeting: 'Hi,',

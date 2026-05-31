@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { generateKitToken } from '@/lib/kit-token';
+import { generateKitToken } from '@/lib/kits/generate-kit-token';
 
 // The DB enforces this exact shape via press_kit_token_format_ck.
 const TOKEN_CONSTRAINT = /^[A-Za-z0-9_-]{16,64}$/;

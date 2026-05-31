@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'vitest';
-import { loginSchema, signupSchema } from '@/lib/auth/schemas';
+import { loginSchema } from '@/lib/auth/schemas/login-schema';
+import { signupSchema } from '@/lib/auth/schemas/signup-schema';
 
 describe('signupSchema', () => {
   const valid = {
