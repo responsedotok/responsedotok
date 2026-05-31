@@ -1,10 +1,10 @@
 import { useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
-import { msgFromBody } from '@/utils/msg-from-body';
 import { useAuth } from '@/lib/auth/contexts/provider';
 import { validateLogin } from '@/lib/auth/validation/validate-login';
 import type { FieldErrors } from '@/lib/types/field-errors';
 import type { LoginInput } from '@/lib/types/login-input';
+import { msgFromBody } from '@/utils/msg-from-body';
 
 export function useLogin() {
   const { login } = useAuth();

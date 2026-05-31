@@ -1,10 +1,10 @@
 import { useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
-import { msgFromBody } from '@/utils/msg-from-body';
 import { useAuth } from '@/lib/auth/contexts/provider';
 import { validateSignup } from '@/lib/auth/validation/validate-signup';
 import type { FieldErrors } from '@/lib/types/field-errors';
 import type { SignupInput } from '@/lib/types/signup-input';
+import { msgFromBody } from '@/utils/msg-from-body';
 
 export function useSignup() {
   const { signup } = useAuth();

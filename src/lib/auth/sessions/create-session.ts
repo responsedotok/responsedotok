@@ -1,8 +1,7 @@
-
-import type { Session } from '@/lib/types/session';
+import { sql } from '@/db/pool';
 import { generateToken } from '@/lib/auth/tokens/generate-token';
 import { hashToken } from '@/lib/auth/tokens/hash-token';
-import { sql } from '@/db/pool';
+import type { Session } from '@/lib/types/session';
 
 /**
  * Creates a new session for the specified user.

@@ -1,5 +1,5 @@
-import { hashToken } from '@/lib/auth/tokens';
 import { sql } from '@/db/pool';
+import { hashToken } from '@/lib/auth/tokens/hash-token';
 
 /**
  * Deletes the session associated with the specified token.

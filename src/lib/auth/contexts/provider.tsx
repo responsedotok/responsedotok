@@ -2,47 +2,45 @@
 
 import {
   createContext,
-  useContext,
-  useCallback,
-  useState,
-  useMemo,
   type ReactNode,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
 } from 'react';
 import type { AuthContextValue } from '@/lib/types/auth-context-value';
-import type {  LastCall }  from '@/lib/types/last-call';
-import { PublicUser } from '@/lib/types/public-user';
-import { _request } from '@/utils/_request';
-import { SignupInput } from '@/lib/types/signup-input';
+import type { LastCall } from '@/lib/types/last-call';
 import type { LoginInput } from '@/lib/types/login-input';
-
+import type { PublicUser } from '@/lib/types/public-user';
+import type { SignupInput } from '@/lib/types/signup-input';
+import { _request } from '@/utils/_request';
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({
   initialUser,
-  children
+  children,
 }: {
   initialUser: PublicUser | null;
   children: ReactNode;
 }) {
-
   const [user, setUser] = useState<PublicUser | null>(initialUser);
   const [lastCall, setLastCall] = useState<LastCall>(null);
 
   const refresh = useCallback(async () => {
     const res = await _request<PublicUser>('/_request/auth/me');
-    setUser(res.ok ? res.body as PublicUser : null)
+    setUser(res.ok ? (res.body as PublicUser) : null);
   }, []);
 
   const signup = useCallback(async (input: SignupInput) => {
-     const res = await _request<PublicUser>('/_request/auth/signup', {
+    const res = await _request<PublicUser>('/_request/auth/signup', {
       method: 'POST',
       body: JSON.stringify(input),
     });
     setLastCall({
       label: 'POST /_request/auth/signup',
       status: res.status,
-      body: res.body
+      body: res.body,
     });
     if (res.ok) setUser(res.body as PublicUser);
     return res;
@@ -56,12 +54,11 @@ export function AuthProvider({
     setLastCall({
       label: 'POST /_request/auth/login',
       status: res.status,
-      body: res.body
+      body: res.body,
     });
     if (res.ok) setUser(res.body as PublicUser);
     return res;
   }, []);
-
 
   const logout = useCallback(async () => {
     const res = await _request<{ ok: true }>('/_request/auth/logout', {
@@ -70,20 +67,23 @@ export function AuthProvider({
     setLastCall({
       label: 'POST /_request/auth/logout',
       status: res.status,
-      body: res.body
+      body: res.body,
     });
     if (res.ok) setUser(null);
     return res;
   }, []);
 
-  const value = useMemo(() => ({
-    user,
-    lastCall,
-    refresh,
-    signup,
-    login,
-    logout,
-  }), [user, lastCall, refresh, signup, login, logout]);
+  const value = useMemo(
+    () => ({
+      user,
+      lastCall,
+      refresh,
+      signup,
+      login,
+      logout,
+    }),
+    [user, lastCall, refresh, signup, login, logout],
+  );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
