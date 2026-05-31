@@ -1,8 +1,8 @@
 import { cache } from 'react';
-import type { PublicUser } from '@/lib/types/public-user';
 import { getSessionCookie } from '@/lib/auth/sessions/cookies/get-session-cookie';
-import { getUserBySession } from './get-user-by-session';
+import type { PublicUser } from '@/lib/types/public-user';
 import { getPublicUser } from './get-public-user';
+import { getUserBySession } from './get-user-by-session';
 
 /**
  * Retrieves the currently authenticated user as a public user object.

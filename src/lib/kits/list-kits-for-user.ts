@@ -1,7 +1,5 @@
-
-import { sql } from "@/db/pool";
-import { KitListItem } from "../types/kit-list-item";
-
+import { sql } from '@/db/pool';
+import type { KitListItem } from '../types/kit-list-item';
 
 /**
  * Lists all press kits for a given user.
@@ -9,7 +7,7 @@ import { KitListItem } from "../types/kit-list-item";
  * @returns An array of press kit list items.
  */
 export async function listKitsForUser(userId: string): Promise<KitListItem[]> {
-    const rows = await sql<KitListItem[]>`
+  const rows = await sql<KitListItem[]>`
     SELECT
       k.token, k.artist_name, k.recipient_name, k.recipient_org,
       k.created_at, k.revoked_at,

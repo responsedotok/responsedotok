@@ -1,6 +1,5 @@
-
 import type { PublicUserRow } from '@/lib/types/public-user-row';
-import { PublicUser } from '../../types/public-user';
+import type { PublicUser } from '../../types/public-user';
 
 /**
  * Converts a PublicUserRow to a PublicUser.

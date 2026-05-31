@@ -1,7 +1,6 @@
-
-import { PublicUserRow } from "../../types/public-user-row";
-import { sql } from "@/db/pool";
-import { hashToken } from "../tokens";
+import { sql } from '@/db/pool';
+import type { PublicUserRow } from '@/lib/types/public-user-row';
+import { hashToken } from '@/lib/auth/tokens/hash-token';
 
 /**
  * Retrieves the user associated with the specified session token.
