@@ -3,4 +3,3 @@ export const EMAIL_PATTERN = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 export const SESSION_COOKIE = process.env.SESSION_COOKIE ?? 'session';
 export const API_URL = '';
 export const DEFAULT_TTL_MS = 12 * 60 * 60 * 1000; // 12 hours
-  
