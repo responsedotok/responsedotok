@@ -1,7 +1,7 @@
 import Link from 'next/link';
+import { CopyLinkButton } from '@/app/(app)/home/copy-link-button';
 import { getCurrentUser } from '@/lib/auth/users/get-current-user';
 import { listKitsForUser } from '@/lib/kits/list-kits-for-user';
-import { CopyLinkButton } from '@/app/(app)/home/copy-link-button';
 
 export const dynamic = 'force-dynamic';
 

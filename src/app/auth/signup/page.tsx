@@ -1,10 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { USERNAME_PATTERN } from '@/lib/constants/constants';
 import { AuthDevPanel } from '@/app/auth/auth-dev-panel';
 import { Field } from '@/app/auth/field';
 import { useSignup } from '@/app/auth/hooks/use-signup';
+import { USERNAME_PATTERN } from '@/lib/constants/constants';
 
 const isDev = process.env.NODE_ENV === 'development';
 

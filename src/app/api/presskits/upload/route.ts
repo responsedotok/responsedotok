@@ -36,9 +36,7 @@ export async function POST(req: Request) {
       body,
       onBeforeGenerateToken: async () => {
         const sessionToken = await getSessionCookie();
-        const user = sessionToken
-          ? await getUserBySession(sessionToken)
-          : null;
+        const user = sessionToken ? await getUserBySession(sessionToken) : null;
         if (!user) throw new Error('You must be signed in to upload.');
 
         return {

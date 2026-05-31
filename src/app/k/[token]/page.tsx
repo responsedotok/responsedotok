@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { RecordView } from '@/app/k/[token]/record-view';
 import { getKitByToken } from '@/lib/kits/get-kit-by-token';
 import { signTrackUrl } from '@/lib/kits/sign-track-url';
-import { RecordView } from '@/app/k/[token]/record-view';
 
 // Always rendered fresh — the token is per-request and the page is uncached.
 export const dynamic = 'force-dynamic';

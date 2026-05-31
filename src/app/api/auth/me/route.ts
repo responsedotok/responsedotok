@@ -1,9 +1,8 @@
 import { NextResponse } from 'next/server';
 import { clearSessionCookie } from '@/lib/auth/sessions/cookies/clear-session-cookie';
 import { getSessionCookie } from '@/lib/auth/sessions/cookies/get-session-cookie';
-
-import { getUserBySession } from '@/lib/auth/users/get-user-by-session';
 import { getPublicUser } from '@/lib/auth/users/get-public-user';
+import { getUserBySession } from '@/lib/auth/users/get-user-by-session';
 
 /**
  * Handles fetching the currently authenticated user's public information.

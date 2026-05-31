@@ -1,16 +1,12 @@
 import argon2 from 'argon2';
 import { NextResponse } from 'next/server';
-import { setSessionCookie } from '@/lib/auth/sessions/cookies/set-session-cookie';
-import { loginSchema } from '@/lib/auth/schemas/login-schema';
-import { createSession } from '@/lib/auth/sessions/create-session';
-import {
-  type PasswordRow,
-} from '@/lib/types/password-row';
 import { sql } from '@/db/pool';
-import type { 
-  PublicUserRow
-} from '@/lib/types/public-user-row';
+import { loginSchema } from '@/lib/auth/schemas/login-schema';
+import { setSessionCookie } from '@/lib/auth/sessions/cookies/set-session-cookie';
+import { createSession } from '@/lib/auth/sessions/create-session';
 import { getPublicUser } from '@/lib/auth/users/get-public-user';
+import type { PasswordRow } from '@/lib/types/password-row';
+import type { PublicUserRow } from '@/lib/types/public-user-row';
 
 /**
  * Handles user login.
