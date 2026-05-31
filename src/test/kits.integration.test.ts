@@ -29,12 +29,13 @@ vi.mock('next/headers', () => ({
 
 import { put } from '@vercel/blob';
 import { createPresskit } from '@/app/(app)/presskit/create-presskit';
+import { sql } from '@/db/pool';
 import { recordView } from '@/db/record-view';
 import { createSession } from '@/lib/auth/sessions/create-session';
-import { sql } from '@/db/pool';
 import { getKitByToken } from '@/lib/kits/get-kit-by-token';
+import { listKitsForUser } from '@/lib/kits/list-kits-for-user';
 import { signTrackUrl } from '@/lib/kits/sign-track-url';
-import { listKitsForUser } from '@/lib/kits/list-kits-for-user' 
+
 const hasSecrets = Boolean(
   process.env.DATABASE_URL && process.env.BLOB_READ_WRITE_TOKEN,
 );
