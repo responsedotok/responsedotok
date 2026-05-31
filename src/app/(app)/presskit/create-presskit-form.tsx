@@ -6,8 +6,11 @@ import { useRef, useState } from 'react';
 import { createPresskit } from '@/app/(app)/presskit/create-presskit';
 import type { Phase } from '@/lib/types/phase';
 
-
-export function CreatePresskitForm({ defaultArtist }: { defaultArtist: string }) {
+export function CreatePresskitForm({
+  defaultArtist,
+}: {
+  defaultArtist: string;
+}) {
   const [phase, setPhase] = useState<Phase>('editing');
   const [error, setError] = useState<string | null>(null);
   const [shareUrl, setShareUrl] = useState<string | null>(null);
@@ -22,7 +25,7 @@ export function CreatePresskitForm({ defaultArtist }: { defaultArtist: string })
 
     const fd = new FormData(form);
 
-    const files = (fd.getAll('songs') as File[]).filter(f => f.size > 0);
+    const files = (fd.getAll('songs') as File[]).filter((f) => f.size > 0);
 
     if (files.length < 1 || files.length > 2) {
       setError('There is a 1 - 2 song upload limit for presskits.');
@@ -30,20 +33,19 @@ export function CreatePresskitForm({ defaultArtist }: { defaultArtist: string })
     }
 
     try {
-
-      setPhase('uploading')
-      const tracks = []
+      setPhase('uploading');
+      const tracks = [];
       for (const f of files) {
         const blob = await upload(f.name, f, {
           access: 'private',
           handleUploadUrl: '/api/presskit/upload',
-          contentType: f.type || undefined
+          contentType: f.type || undefined,
         });
         tracks.push({
           blob_url: blob.url,
           filename: f.name,
           mime_type: blob.contentType || f.type || 'application/octet-stream',
-          size_bytes: f.size
+          size_bytes: f.size,
         });
       }
       setPhase('saving');
@@ -53,19 +55,22 @@ export function CreatePresskitForm({ defaultArtist }: { defaultArtist: string })
         recipient_org: String(fd.get('recipient_org') ?? ''),
         greeting: String(fd.get('greeting') ?? ''),
         pitch: String(fd.get('pitch') ?? ''),
-        tracks
-    });
+        tracks,
+      });
 
-    if (!res.ok) {
-      setError('Failed to create presskit.');
-      setPhase('editing');
-      return;
-    }
+      if (!res.ok) {
+        setError('Failed to create presskit.');
+        setPhase('editing');
+        return;
+      }
 
-    setShareUrl(`${window.location.origin}/presskit/${res.token}`);
-    setPhase('done');
-   } catch (err) {
-      setError((err as Error).message || 'Creating presskit failed on unknown exception. Try again.');
+      setShareUrl(`${window.location.origin}/presskit/${res.token}`);
+      setPhase('done');
+    } catch (err) {
+      setError(
+        (err as Error).message ||
+          'Creating presskit failed on unknown exception. Try again.',
+      );
       setPhase('editing');
     }
   }
@@ -77,11 +82,12 @@ export function CreatePresskitForm({ defaultArtist }: { defaultArtist: string })
           Your presskit has been created!
         </h1>
 
-          <p className="mb-6 text-text-600">
-            Send this private link to the label. Only people with the link can open it.
-         </p>
+        <p className="mb-6 text-text-600">
+          Send this private link to the label. Only people with the link can
+          open it.
+        </p>
 
-         <div className="mb-4 flex items-center gap-2 rounded-lg border border-background-300 bg-background-100 p-3">
+        <div className="mb-4 flex items-center gap-2 rounded-lg border border-background-300 bg-background-100 p-3">
           <code className="flex-1 truncate font-mono text-sm text-text-900">
             {shareUrl}
           </code>
@@ -113,7 +119,7 @@ export function CreatePresskitForm({ defaultArtist }: { defaultArtist: string })
       </main>
     );
   }
-  
+
   const busy = phase === 'uploading' || phase === 'saving';
 
   return (
