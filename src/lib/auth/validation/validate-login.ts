@@ -1,5 +1,5 @@
-import type { LoginInput } from '@/lib/types/login-input';
 import type { FieldErrors } from '@/lib/types/field-errors';
+import type { LoginInput } from '@/lib/types/login-input';
 
 /**
  * Validates the login input fields.

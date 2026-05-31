@@ -1,6 +1,6 @@
-import { USERNAME_PATTERN, EMAIL_PATTERN } from '@/lib/constants/constants';
-import type { SignupInput } from '@/lib/types/signup-input';
+import { EMAIL_PATTERN, USERNAME_PATTERN } from '@/lib/constants/constants';
 import type { FieldErrors } from '@/lib/types/field-errors';
+import type { SignupInput } from '@/lib/types/signup-input';
 
 /**
  * Validates the signup input fields.
