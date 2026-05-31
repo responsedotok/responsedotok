@@ -1,4 +1,4 @@
-import { readdir } from  'node:fs/promises';
+import { readdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import postgres from 'postgres';
 
@@ -35,7 +35,7 @@ async function migrate() {
     `;
     const applied = new Set(rows.map((r) => r.filename));
 
-    const f = await readdir(MIGRATIONS_DIR)
+    const f = await readdir(MIGRATIONS_DIR);
     const files = f.filter((i) => i.endsWith('.sql')).sort();
     if (files.length === 0) {
       console.info('No migration files found.');
@@ -44,7 +44,7 @@ async function migrate() {
 
     for (const fi of files) {
       if (applied.has(fi)) {
-        console.info(`${fi} was already applied. Skipping.`)
+        console.info(`${fi} was already applied. Skipping.`);
         continue;
       }
       console.info(`→  Applying migration: ${fi}`);
@@ -54,17 +54,15 @@ async function migrate() {
           INSERT INTO _migrations (filename)
           VALUES (${fi})
         `;
-      })
+      });
     }
     console.info('All migrations complete.');
-
-    } finally {
-      await sql.end();
-      
-    }  
+  } finally {
+    await sql.end();
   }
-  
-  migrate().catch((err) => {
-    console.error('Migration error:  ', err);
-    process.exit(1);
-  });
+}
+
+migrate().catch((err) => {
+  console.error('Migration error:  ', err);
+  process.exit(1);
+});

@@ -1,5 +1,5 @@
-import type { ApiResult } from '@/lib/types/api-result';
 import { API_URL } from '@/lib/constants/constants';
+import type { ApiResult } from '@/lib/types/api-result';
 
 /**
  * Makes an API request.
