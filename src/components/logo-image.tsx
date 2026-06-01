@@ -1,9 +1,9 @@
 import Image from 'next/image';
 
-export default function LogoImage({ className }: { className?: string }) {
+export default function LogoImage({ className, src }: { className?: string, src: string }) {
   return (
     <Image
-      src="/resdotok.svg"
+      src={src}
       alt=""
       aria-hidden
       priority

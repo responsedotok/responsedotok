@@ -18,11 +18,11 @@ export default function SignupPage() {
   return (
     <div className="font-sans">
       <header className="mb-8 font-sans">
-        <h1 className="whitespace-nowrap text-3xl font-semibold text-text-800">
+        <h1 className="whitespace-nowrap text-3xl font-semibold text-text-200">
           Create an account
         </h1>
-        <p className="max-w-xs leading-relaxed text-text-800">
-          Share the private link & let your work speak.
+        <p className="max-w-xs leading-relaxed text-text-200">
+          Signup to curate your sound.
         </p>
       </header>
 

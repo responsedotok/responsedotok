@@ -13,10 +13,10 @@ export default function LoginPage() {
   return (
     <div className="font-sans">
       <header className="mb-8 font-sans">
-        <h1 className="whitespace-nowrap text-3xl font-semibold text-text-800">
+        <h1 className="whitespace-nowrap text-3xl font-semibold text-text-200">
           Welcome back
         </h1>
-        <p className="max-w-sm leading-relaxed text-text-800">
+        <p className="max-w-sm leading-relaxed text-text-200">
           Share the private link & let your work speak.
         </p>
       </header>
