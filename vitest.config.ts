@@ -16,7 +16,7 @@ export default defineConfig({
         'src/test/**',
         'src/**/*.test.{ts,tsx}',
         'src/db/migrate.mjs',
-        'src/db/pool.ts', // connection-pool bootstrap; no logic to exercise
+        'src/db/pool.ts',
         'src/**/layout.tsx',
         'src/app/**/page.tsx',
         'src/lib/types/**',
