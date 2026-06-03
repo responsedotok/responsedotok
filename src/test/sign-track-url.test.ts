@@ -8,7 +8,7 @@ const { issueSignedToken, presignUrl } = vi.hoisted(() => ({
 
 vi.mock('@vercel/blob', () => ({ issueSignedToken, presignUrl }));
 
-import { signTrackUrl } from '@/lib/kits/sign-track-url';
+import { signTrackUrl } from '@/utils/sign-track-url';
 
 beforeEach(() => {
   issueSignedToken.mockReset();

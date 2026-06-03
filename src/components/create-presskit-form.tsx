@@ -3,7 +3,7 @@
 import { upload } from '@vercel/blob/client';
 import Link from 'next/link';
 import { useRef, useState } from 'react';
-import { createPresskit } from '@/app/(app)/presskit/create-presskit';
+import { createPresskit } from '@/app/(app)/_utils/create-presskit';
 import type { Phase } from '@/lib/types/phase';
 
 export function CreatePresskitForm({
@@ -38,7 +38,7 @@ export function CreatePresskitForm({
       for (const f of files) {
         const blob = await upload(f.name, f, {
           access: 'private',
-          handleUploadUrl: '/api/presskit/upload',
+          handleUploadUrl: '/api/presskits/upload',
           contentType: f.type || undefined,
         });
         tracks.push({
@@ -64,7 +64,7 @@ export function CreatePresskitForm({
         return;
       }
 
-      setShareUrl(`${window.location.origin}/presskit/${res.token}`);
+      setShareUrl(`${window.location.origin}/k/${res.token}`);
       setPhase('done');
     } catch (err) {
       setError(
@@ -78,11 +78,11 @@ export function CreatePresskitForm({
   if (phase === 'done' && shareUrl) {
     return (
       <main className="mx-auto w-full max-w-2xl flex-1 px-6 py-12 font-sans">
-        <h1 className="mb-3 text-2xl font-semibold text-text-900">
+        <h1 className="mt-0 mb-3 text-text-200">
           Your presskit has been created!
         </h1>
 
-        <p className="mb-6 text-text-600">
+        <p className="mb-6 text-text-500">
           Send this private link to the label. Only people with the link can
           open it.
         </p>
@@ -97,7 +97,7 @@ export function CreatePresskitForm({
               await navigator.clipboard.writeText(shareUrl);
               setCopied(true);
             }}
-            className="rounded bg-primary-700 px-3 py-1.5 text-sm font-medium text-text-50 hover:bg-primary-600"
+            className="rounded bg-primary-700 px-3 py-1.5 text-sm font-medium text-text-200 hover:bg-primary-600"
           >
             {copied ? 'Copied' : 'Copy'}
           </button>
@@ -124,10 +124,8 @@ export function CreatePresskitForm({
 
   return (
     <main className="mx-auto w-full max-w-2xl flex-1 px-6 py-12 font-sans">
-      <h1 className="mb-2 text-2xl font-semibold text-text-900">
-        New press kit
-      </h1>
-      <p className="mb-8 text-text-600">
+      <h1 className="mt-0 mb-2 text-text-200">New press kit</h1>
+      <p className="mb-8 text-text-500">
         Enter a note for the recipient. Then upload a song or two, and send it.
       </p>
 
@@ -214,7 +212,7 @@ export function CreatePresskitForm({
         <button
           type="submit"
           disabled={busy}
-          className="mt-1 justify-self-start rounded bg-primary-700 px-5 py-2 text-sm font-medium text-text-50 hover:bg-primary-600 disabled:opacity-60"
+          className="mt-1 justify-self-start rounded bg-primary-700 px-5 py-2 text-sm font-medium text-text-200 hover:bg-primary-600 disabled:opacity-60"
         >
           {phase === 'uploading'
             ? 'Uploading songs…'

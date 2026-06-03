@@ -1,7 +1,8 @@
 import { Analytics } from '@vercel/analytics/next';
 import type { Metadata } from 'next';
-import { Crimson_Pro, SUSE } from 'next/font/google';
+import { Crimson_Pro, Fira_Code, SUSE } from 'next/font/google';
 import './globals.css';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { getCurrentUser } from '@/lib/auth//users/get-current-user';
 import { AuthProvider } from '@/lib/auth/contexts/provider';
 
@@ -15,8 +16,13 @@ const crimsonPro = Crimson_Pro({
   subsets: ['latin'],
 });
 
+const firaMono = Fira_Code({
+  variable: '--font-fira-code',
+  subsets: ['latin'],
+});
+
 export const metadata: Metadata = {
-  title: 'Create Next App',
+  title: 'responsedotok',
   description: 'A website called responsedotok.com',
 };
 
@@ -30,9 +36,10 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${suseSans.variable} ${crimsonPro.variable} h-full antialiased`}
+      className={`${suseSans.variable} ${crimsonPro.variable} ${firaMono.variable} h-full antialiased`}
     >
       <Analytics />
+      <SpeedInsights />
       <body className="min-h-full flex flex-col">
         <AuthProvider initialUser={user}>{children}</AuthProvider>
       </body>

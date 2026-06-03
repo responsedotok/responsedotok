@@ -41,11 +41,11 @@ afterAll(() => {
 
 const h = vi.hoisted(() => ({ upload: vi.fn(), createPresskit: vi.fn() }));
 vi.mock('@vercel/blob/client', () => ({ upload: h.upload }));
-vi.mock('@/app/(app)/presskit/create-presskit', () => ({
+vi.mock('@/app/(app)/_utils/create-presskit', () => ({
   createPresskit: h.createPresskit,
 }));
 
-import { CreatePresskitForm } from '@/app/(app)/presskit/create-presskit-form';
+import { CreatePresskitForm } from '@/components/create-presskit-form';
 
 async function fillText(user: ReturnType<typeof userEvent.setup>) {
   await user.type(screen.getByPlaceholderText('e.g. Jordan at XL'), 'Jordan');
@@ -109,7 +109,7 @@ describe('CreatePresskitForm', () => {
       }),
     );
     expect(
-      screen.getByText(`${window.location.origin}/presskit/kit_token_123456`),
+      screen.getByText(`${window.location.origin}/k/kit_token_123456`),
     ).toBeInTheDocument();
   });
 

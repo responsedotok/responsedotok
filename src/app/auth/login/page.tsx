@@ -11,11 +11,11 @@ export default function LoginPage() {
   const { onSubmit: onLogin, loginErrors, loginServerError } = useLogin();
 
   return (
-    <main className="mx-auto w-full max-w-2xl flex-1 px-6 py-12 font-sans">
-      <h1 className="mb-8 text-2xl font-semibold text-text-900">Log in</h1>
+    <>
+      <section className="mb-8 p-4 font-sans max-w-sm w-full h-full mx-auto">
+        <h1 className="mb-8 text-text-200">Log In</h1>
 
-      <section className="mb-8 rounded-lg border border-background-200 bg-background-100 p-4">
-        <form onSubmit={onLogin} className="grid gap-3" noValidate>
+        <form onSubmit={onLogin} className="grid gap-8 mb-12" noValidate>
           <Field
             name="identifier"
             placeholder="username or email"
@@ -32,26 +32,22 @@ export default function LoginPage() {
           {loginServerError && (
             <p className="text-sm text-secondary-600">{loginServerError}</p>
           )}
-          <button
-            type="submit"
-            className="mt-1 rounded bg-primary-700 px-4 py-2 text-sm font-medium text-text-50 hover:bg-primary-600"
-          >
+          <button type="submit" className="mb-4">
             Log in
           </button>
         </form>
+
+        <p className="text-sm text-text-500">
+          Need an account?{' '}
+          <Link
+            href="/auth/signup"
+            className="text-primary-600 hover:text-primary-500"
+          >
+            Sign up
+          </Link>
+        </p>
       </section>
-
-      <p className="text-sm text-text-500">
-        Need an account?{' '}
-        <Link
-          href="/auth/signup"
-          className="text-primary-600 hover:text-primary-500"
-        >
-          Sign up
-        </Link>
-      </p>
-
       {isDev && <AuthDevPanel />}
-    </main>
+    </>
   );
 }

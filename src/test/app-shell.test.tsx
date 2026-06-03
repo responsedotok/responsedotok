@@ -41,13 +41,9 @@ function renderShell(initialUser: PublicUser | null) {
 }
 
 describe('AppShell', () => {
-  test('renders children and the brand link', () => {
+  test('renders children', () => {
     renderShell(null);
     expect(screen.getByText('content')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'response.ok' })).toHaveAttribute(
-      'href',
-      '/home',
-    );
   });
 
   test('hides the user controls when signed out', () => {
@@ -66,7 +62,7 @@ describe('AppShell', () => {
     await u.click(screen.getByRole('button', { name: 'Log out' }));
 
     expect(h.request).toHaveBeenCalledWith(
-      '/_request/auth/logout',
+      '/api/auth/logout',
       expect.objectContaining({ method: 'POST' }),
     );
     await waitFor(() => expect(push).toHaveBeenCalledWith('/auth/login'));

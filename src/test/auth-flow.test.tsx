@@ -107,7 +107,7 @@ describe('AuthProvider', () => {
     await waitFor(() =>
       expect(screen.getByTestId('user')).toHaveTextContent('anon'),
     );
-    expect(h.request).toHaveBeenCalledWith('/_request/auth/me');
+    expect(h.request).toHaveBeenCalledWith('/api/auth/me');
   });
 
   test('useAuth throws when used outside a provider', () => {

@@ -2,8 +2,11 @@
 
 import { useState } from 'react';
 
-// Composes the absolute share URL on the client (needs window.origin) and
-// copies it to the clipboard.
+/**
+ * Composes the absolute share URL on the client and copies it to the clipboard.
+ * @param param0 token [string] The token to be included in the share URL.
+ * @returns void
+ */
 export function CopyLinkButton({ token }: { token: string }) {
   const [copied, setCopied] = useState(false);
   return (

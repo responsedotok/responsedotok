@@ -28,13 +28,13 @@ vi.mock('next/headers', () => ({
 }));
 
 import { put } from '@vercel/blob';
-import { createPresskit } from '@/app/(app)/presskit/create-presskit';
+import { createPresskit } from '@/app/(app)/_utils/create-presskit';
 import { sql } from '@/db/pool';
 import { recordView } from '@/db/record-view';
 import { createSession } from '@/lib/auth/sessions/create-session';
-import { getKitByToken } from '@/lib/kits/get-kit-by-token';
-import { listKitsForUser } from '@/lib/kits/list-kits-for-user';
-import { signTrackUrl } from '@/lib/kits/sign-track-url';
+import { getPresskitByToken } from '@/lib/presskits/get-presskit-by-token';
+import { listPresskitsForUser } from '@/lib/presskits/list-presskits-for-user';
+import { signTrackUrl } from '@/utils/sign-track-url';
 
 const hasSecrets = Boolean(
   process.env.DATABASE_URL && process.env.BLOB_READ_WRITE_TOKEN,
@@ -121,8 +121,8 @@ describe.skipIf(!hasSecrets)('press kit data path (integration)', () => {
     expect(res.ok).toBe(false);
   });
 
-  test('getKitByToken returns the kit with its track', async () => {
-    const kit = await getKitByToken(createdToken);
+  test('getPresskitByToken returns the kit with its track', async () => {
+    const kit = await getPresskitByToken(createdToken);
     expect(kit).not.toBeNull();
     expect(kit?.artist_name).toBe('The Testers');
     expect(kit?.recipient_org).toBe('XL Recordings');
@@ -130,8 +130,8 @@ describe.skipIf(!hasSecrets)('press kit data path (integration)', () => {
     expect(kit?.tracks[0].blob_url).toBe(blobUrl);
   });
 
-  test('getKitByToken returns null for an unknown token', async () => {
-    expect(await getKitByToken('deadbeefdeadbeef')).toBeNull();
+  test('getPresskitByToken returns null for an unknown token', async () => {
+    expect(await getPresskitByToken('deadbeefdeadbeef')).toBeNull();
   });
 
   test('signTrackUrl yields a streamable URL; bare URL is forbidden', async () => {
@@ -145,14 +145,14 @@ describe.skipIf(!hasSecrets)('press kit data path (integration)', () => {
   });
 
   test('recordView increments the open count', async () => {
-    const before = await listKitsForUser(userId);
+    const before = await listPresskitsForUser(userId);
     expect(before[0].view_count).toBe(0);
     expect(before[0].last_viewed_at).toBeNull();
 
     await recordView(createdToken);
     await recordView(createdToken);
 
-    const after = await listKitsForUser(userId);
+    const after = await listPresskitsForUser(userId);
     expect(after[0].view_count).toBe(2);
     expect(after[0].last_viewed_at).not.toBeNull();
   });

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { trackSchema } from '@/app/(app)/presskit/tracks-schema';
+import { trackSchema } from '@/app/(app)/_schemas/tracks-schema';
 
 export const presskitSchema = z.object({
   artist_name: z.string().trim().min(1).max(100),

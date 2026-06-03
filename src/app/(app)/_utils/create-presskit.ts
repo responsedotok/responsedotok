@@ -1,8 +1,10 @@
-import { presskitSchema } from '@/app/(app)/presskit/presskit-schema';
+'use server';
+
+import { presskitSchema } from '@/app/(app)/_schemas/presskit-schema';
 import { sql } from '@/db/pool';
 import { getSessionCookie } from '@/lib/auth/sessions/cookies/get-session-cookie';
 import { getUserBySession } from '@/lib/auth/users/get-user-by-session';
-import { generateKitToken } from '@/lib/kits/generate-kit-token';
+import { generatePresskitToken } from '@/lib/presskits/generate-presskit-token';
 import type { CreateKitInput } from '@/lib/types/create-kit-input';
 import type { CreateKitResult } from '@/lib/types/create-kit-result';
 
@@ -23,7 +25,7 @@ export async function createPresskit(
     return { ok: false, error: 'Please check the form and try again.' };
   }
   const d = parsed.data;
-  const token = generateKitToken();
+  const token = generatePresskitToken();
 
   await sql.begin(async (tx) => {
     const [kit] = await tx<{ id: string }[]>`

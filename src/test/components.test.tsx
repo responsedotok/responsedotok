@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
-import { CopyLinkButton } from '@/app/(app)/home/copy-link-button';
+import { CopyLinkButton } from '@/app/(app)/_utils/copy-link-button';
 import { Field } from '@/app/auth/field';
 
 describe('Field', () => {
