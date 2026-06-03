@@ -1,3 +1,5 @@
+'use server';
+
 import { presskitSchema } from '@/app/(app)/_schemas/presskit-schema';
 import { sql } from '@/db/pool';
 import { getSessionCookie } from '@/lib/auth/sessions/cookies/get-session-cookie';
