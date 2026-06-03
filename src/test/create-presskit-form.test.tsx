@@ -41,7 +41,7 @@ afterAll(() => {
 
 const h = vi.hoisted(() => ({ upload: vi.fn(), createPresskit: vi.fn() }));
 vi.mock('@vercel/blob/client', () => ({ upload: h.upload }));
-vi.mock('@/app/(app)/presskit/create-presskit', () => ({
+vi.mock('@/app/(app)/_utils/create-presskit', () => ({
   createPresskit: h.createPresskit,
 }));
 
@@ -109,7 +109,7 @@ describe('CreatePresskitForm', () => {
       }),
     );
     expect(
-      screen.getByText(`${window.location.origin}/presskit/kit_token_123456`),
+      screen.getByText(`${window.location.origin}/k/kit_token_123456`),
     ).toBeInTheDocument();
   });
 

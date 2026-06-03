@@ -1,6 +1,12 @@
 import Image from 'next/image';
 
-export default function LogoImage({ className, src }: { className?: string, src: string }) {
+export default function LogoImage({
+  className,
+  src,
+}: {
+  className?: string;
+  src: string;
+}) {
   return (
     <Image
       src={src}

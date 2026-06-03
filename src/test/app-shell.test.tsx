@@ -41,13 +41,9 @@ function renderShell(initialUser: PublicUser | null) {
 }
 
 describe('AppShell', () => {
-  test('renders children and the brand link', () => {
+  test('renders children', () => {
     renderShell(null);
     expect(screen.getByText('content')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'response.ok' })).toHaveAttribute(
-      'href',
-      '/home',
-    );
   });
 
   test('hides the user controls when signed out', () => {

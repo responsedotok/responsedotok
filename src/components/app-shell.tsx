@@ -23,13 +23,9 @@ export function AppShell({ children }: { children: ReactNode }) {
           </span>
           <span aria-hidden>·</span>
           <div>
-          <button
-            type="button"
-            onClick={onLogout}
-            className=""
-          >
-            Log out
-          </button>
+            <button type="button" onClick={onLogout} className="">
+              Log out
+            </button>
           </div>
         </div>
       )}

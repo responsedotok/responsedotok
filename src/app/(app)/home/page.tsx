@@ -23,11 +23,8 @@ export default async function HomePage() {
           A press kit is a private page you send to a label — your music, your
           story and your links, all in one place. Make one and share the link.
         </p>
-        <Link
-          href="/create"
-          className="mt-8"
-        >
-          <button>Create a press kit</button>
+        <Link href="/create" className="mt-8">
+          <button type="submit">Create a press kit</button>
         </Link>
       </main>
     );

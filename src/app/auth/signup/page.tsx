@@ -24,52 +24,48 @@ export default function SignupPage() {
         <p className="mb-4 text-text-200">
           Signup to generate presskits for your music.
         </p>
-     
 
-      <form onSubmit={onSignup} className="grid gap-5 mb-12" noValidate>
-        <Field
-          name="username"
-          placeholder="username"
-          pattern={USERNAME_PATTERN.source}
-          minLength={3}
-          maxLength={32}
-          autoComplete="username"
-          error={signupErrors.username}
-        />
-        <Field
-          name="email"
-          type="email"
-          placeholder="email"
-          maxLength={320}
-          autoComplete="email"
-          error={signupErrors.email}
-        />
-        <Field
-          name="password"
-          type="password"
-          placeholder="password"
-          minLength={8}
-          maxLength={256}
-          autoComplete="new-password"
-          error={signupErrors.password}
-        />
-        <Field
-          name="display_name"
-          placeholder="display name"
-          minLength={1}
-          maxLength={100}
-          error={signupErrors.display_name}
-        />
-        {signupServerError && (
-          <p className="text-sm text-secondary-600">{signupServerError}</p>
-        )}
-        <button
-          type="submit"
-          className="mb-4"
-        >
-          Create account
-        </button>
-      </form>
+        <form onSubmit={onSignup} className="grid gap-5 mb-12" noValidate>
+          <Field
+            name="username"
+            placeholder="username"
+            pattern={USERNAME_PATTERN.source}
+            minLength={3}
+            maxLength={32}
+            autoComplete="username"
+            error={signupErrors.username}
+          />
+          <Field
+            name="email"
+            type="email"
+            placeholder="email"
+            maxLength={320}
+            autoComplete="email"
+            error={signupErrors.email}
+          />
+          <Field
+            name="password"
+            type="password"
+            placeholder="password"
+            minLength={8}
+            maxLength={256}
+            autoComplete="new-password"
+            error={signupErrors.password}
+          />
+          <Field
+            name="display_name"
+            placeholder="display name"
+            minLength={1}
+            maxLength={100}
+            error={signupErrors.display_name}
+          />
+          {signupServerError && (
+            <p className="text-sm text-secondary-600">{signupServerError}</p>
+          )}
+          <button type="submit" className="mb-4">
+            Create account
+          </button>
+        </form>
 
         <p className="text-sm text-text-500">
           Already have an account?{' '}
