@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
-import { presskitSchema } from '@/app/(app)/presskit/presskit-schema';
-import { trackSchema } from '@/app/(app)/presskit/tracks-schema';
+import { presskitSchema } from '@/app/(app)/_schemas/presskit-schema';
+import { trackSchema } from '@/app/(app)/_schemas/tracks-schema';
 
 const track = {
   blob_url: 'https://blob.example.com/song.mp3',

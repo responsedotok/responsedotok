@@ -45,7 +45,7 @@ vi.mock('@/app/(app)/presskit/create-presskit', () => ({
   createPresskit: h.createPresskit,
 }));
 
-import { CreatePresskitForm } from '@/app/(app)/presskit/create-presskit-form';
+import { CreatePresskitForm } from '@/components/create-presskit-form';
 
 async function fillText(user: ReturnType<typeof userEvent.setup>) {
   await user.type(screen.getByPlaceholderText('e.g. Jordan at XL'), 'Jordan');

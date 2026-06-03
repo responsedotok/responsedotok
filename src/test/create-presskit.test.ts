@@ -18,7 +18,7 @@ vi.mock('@/lib/auth/users/get-user-by-session', () => ({
   getUserBySession: h.getUserBySession,
 }));
 
-import { createPresskit } from '@/app/(app)/presskit/create-presskit';
+import { createPresskit } from '@/app/(app)/_utils/create-presskit';
 import { sql } from '@/db/pool';
 
 const mockBegin = (sql as unknown as { begin: Mock }).begin;

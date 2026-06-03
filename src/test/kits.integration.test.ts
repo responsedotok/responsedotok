@@ -28,7 +28,7 @@ vi.mock('next/headers', () => ({
 }));
 
 import { put } from '@vercel/blob';
-import { createPresskit } from '@/app/(app)/presskit/create-presskit';
+import { createPresskit } from '@/app/(app)/_utils/create-presskit';
 import { sql } from '@/db/pool';
 import { recordView } from '@/db/record-view';
 import { createSession } from '@/lib/auth/sessions/create-session';

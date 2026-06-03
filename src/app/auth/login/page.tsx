@@ -11,17 +11,14 @@ export default function LoginPage() {
   const { onSubmit: onLogin, loginErrors, loginServerError } = useLogin();
 
   return (
-    <div className="font-sans">
-      <header className="mb-8 font-sans">
-        <h1 className="whitespace-nowrap text-3xl font-semibold text-text-200">
-          Welcome back
+    <>
+      <section className="mb-8 p-4 font-sans max-w-sm w-full h-full mx-auto">
+        <h1 className="mb-8 text-text-200">
+          Log In
         </h1>
-        <p className="max-w-sm leading-relaxed text-text-200">
-          Share the private link & let your work speak.
-        </p>
-      </header>
+      
 
-      <form onSubmit={onLogin} className="grid gap-5" noValidate>
+      <form onSubmit={onLogin} className="grid gap-8 mb-12" noValidate>
         <Field
           name="identifier"
           placeholder="username or email"
@@ -40,23 +37,23 @@ export default function LoginPage() {
         )}
         <button
           type="submit"
-          className="mt-1 rounded bg-primary-700 px-4 py-2 text-sm font-medium text-text-50 hover:bg-primary-600"
+          className="mb-4"
         >
           Log in
         </button>
       </form>
 
-      <p className="mt-8 font-sans text-sm text-text-500">
-        Need an account?{' '}
-        <Link
-          href="/auth/signup"
-          className="font-medium text-primary-600 hover:text-primary-500"
-        >
-          Sign up
-        </Link>
-      </p>
-
+        <p className="text-sm text-text-500">
+          Need an account?{' '}
+          <Link
+            href="/auth/signup"
+            className="text-primary-600 hover:text-primary-500"
+          >
+            Sign up
+          </Link>
+        </p>
+      </section>
       {isDev && <AuthDevPanel />}
-    </div>
+    </>
   );
 }

@@ -16,17 +16,17 @@ export default function SignupPage() {
   } = useSignup();
 
   return (
-    <div className="font-sans">
-      <header className="mb-8 font-sans">
-        <h1 className="whitespace-nowrap text-3xl font-semibold text-text-200">
+    <>
+      <section className="mb-8 font-sans max-w-sm w-full h-full mx-auto">
+        <h1 className="whitespace-nowrap text-left mb-8 text-text-200 tracking-tightest">
           Create an account
         </h1>
-        <p className="max-w-xs leading-relaxed text-text-200">
-          Signup to curate your sound.
+        <p className="mb-4 text-text-200">
+          Signup to generate presskits for your music.
         </p>
-      </header>
+     
 
-      <form onSubmit={onSignup} className="grid gap-5" noValidate>
+      <form onSubmit={onSignup} className="grid gap-5 mb-12" noValidate>
         <Field
           name="username"
           placeholder="username"
@@ -65,23 +65,23 @@ export default function SignupPage() {
         )}
         <button
           type="submit"
-          className="mt-1 rounded bg-primary-700 px-4 py-2 text-sm font-medium text-text-50 hover:bg-primary-600"
+          className="mb-4"
         >
           Create account
         </button>
       </form>
 
-      <p className="mt-8 font-sans text-sm text-text-500">
-        Already have an account?{' '}
-        <Link
-          href="/auth/login"
-          className="font-medium text-primary-600 hover:text-primary-500"
-        >
-          Log in
-        </Link>
-      </p>
-
+        <p className="text-sm text-text-500">
+          Already have an account?{' '}
+          <Link
+            href="/auth/login"
+            className="text-primary-600 hover:text-primary-500"
+          >
+            Log in
+          </Link>
+        </p>
+      </section>
       {isDev && <AuthDevPanel />}
-    </div>
+    </>
   );
 }
