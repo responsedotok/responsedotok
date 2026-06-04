@@ -33,7 +33,7 @@
     "@types/node": "^25",
     "@types/react": "19.2.15",
     "@types/react-dom": "19.2.3",
-    "@vitest/coverage-v8": "4.1.7",
+    "@vitest/coverage-v8": "4.1.8",
     "dotenv": "17.4.2",
     "jsdom": "29.1.1",
     "tailwindcss": "^4",
