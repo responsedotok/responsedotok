@@ -8,12 +8,18 @@ const AUDIO_TYPES = [
   'audio/mp3',
   'audio/wav',
   'audio/x-wav',
+  'audio/wave',
   'audio/flac',
+  'audio/x-flac',
   'audio/aac',
   'audio/ogg',
+  'audio/opus',
   'audio/mp4',
   'audio/x-m4a',
   'audio/webm',
+  // AIFF — the default export format of Logic and GarageBand.
+  'audio/aiff',
+  'audio/x-aiff',
 ];
 
 const MAX_BYTES = 100 * 1024 * 1024; // 100 MB per track

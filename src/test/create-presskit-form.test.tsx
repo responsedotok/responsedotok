@@ -79,6 +79,25 @@ describe('CreatePresskitForm', () => {
     expect(h.upload).not.toHaveBeenCalled();
   });
 
+  test('shows a per-field error and skips the upload when a field is empty', async () => {
+    const user = userEvent.setup();
+    render(<CreatePresskitForm defaultArtist="The Testers" />);
+
+    // Fill everything except the pitch textarea.
+    await user.type(screen.getByPlaceholderText('e.g. Jordan at XL'), 'Jordan');
+    await user.type(screen.getByPlaceholderText('Hi Jordan,'), 'Hi Jordan,');
+    await user.upload(screen.getByLabelText(/songs/i), audio());
+    await user.click(
+      screen.getByRole('button', { name: /generate press kit/i }),
+    );
+
+    expect(
+      screen.getByText(/write a sentence or two about why you are a fit/i),
+    ).toBeInTheDocument();
+    expect(h.upload).not.toHaveBeenCalled();
+    expect(h.createPresskit).not.toHaveBeenCalled();
+  });
+
   test('uploads songs, creates the kit, and shows the share link', async () => {
     h.upload.mockResolvedValue({
       url: 'https://blob.example/song.mp3',
@@ -128,11 +147,7 @@ describe('CreatePresskitForm', () => {
       screen.getByRole('button', { name: /generate press kit/i }),
     );
 
-    await waitFor(() =>
-      expect(
-        screen.getByText('Failed to create presskit.'),
-      ).toBeInTheDocument(),
-    );
+    await waitFor(() => expect(screen.getByText('nope')).toBeInTheDocument());
     expect(
       screen.getByRole('button', { name: /generate press kit/i }),
     ).toBeEnabled();

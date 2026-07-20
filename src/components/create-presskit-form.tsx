@@ -4,7 +4,41 @@ import { upload } from '@vercel/blob/client';
 import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { createPresskit } from '@/app/(app)/_utils/create-presskit';
+import {
+  type PresskitTextInput,
+  validatePresskitForm,
+} from '@/lib/presskits/validate-presskit-form';
+import type { FieldErrors } from '@/lib/types/field-errors';
 import type { Phase } from '@/lib/types/phase';
+
+type FormErrors = FieldErrors<PresskitTextInput> & { songs?: string };
+
+// Browsers report an empty MIME type for extensions the OS doesn't know;
+// the upload token check rejects blank types, so fall back on the extension.
+const EXT_MIME: Record<string, string> = {
+  mp3: 'audio/mpeg',
+  wav: 'audio/wav',
+  flac: 'audio/flac',
+  aac: 'audio/aac',
+  ogg: 'audio/ogg',
+  opus: 'audio/opus',
+  m4a: 'audio/x-m4a',
+  mp4: 'audio/mp4',
+  webm: 'audio/webm',
+  aif: 'audio/aiff',
+  aiff: 'audio/aiff',
+};
+
+function fileContentType(f: File): string | undefined {
+  if (f.type) return f.type;
+  const ext = f.name.split('.').pop()?.toLowerCase() ?? '';
+  return EXT_MIME[ext];
+}
+
+function FieldError({ message }: { message?: string }) {
+  if (!message) return null;
+  return <p className="text-sm text-secondary-600">{message}</p>;
+}
 
 export function CreatePresskitForm({
   defaultArtist,
@@ -13,6 +47,7 @@ export function CreatePresskitForm({
 }) {
   const [phase, setPhase] = useState<Phase>('editing');
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<FormErrors>({});
   const [shareUrl, setShareUrl] = useState<string | null>(null);
   const [copied, setCopied] = useState<boolean>(false);
   const formRef = useRef<HTMLFormElement | null>(null);
@@ -27,39 +62,45 @@ export function CreatePresskitForm({
 
     const files = (fd.getAll('songs') as File[]).filter((f) => f.size > 0);
 
+    const input: PresskitTextInput = {
+      artist_name: String(fd.get('artist_name') ?? ''),
+      recipient_name: String(fd.get('recipient_name') ?? ''),
+      recipient_org: String(fd.get('recipient_org') ?? ''),
+      greeting: String(fd.get('greeting') ?? ''),
+      pitch: String(fd.get('pitch') ?? ''),
+    };
+
+    const errors: FormErrors = validatePresskitForm(input);
     if (files.length < 1 || files.length > 2) {
-      setError('There is a 1 - 2 song upload limit for presskits.');
-      return;
+      errors.songs = 'There is a 1 - 2 song upload limit for presskits.';
     }
+    setFieldErrors(errors);
+    if (Object.keys(errors).length > 0) return;
 
     try {
       setPhase('uploading');
       const tracks = [];
       for (const f of files) {
+        const contentType = fileContentType(f);
         const blob = await upload(f.name, f, {
           access: 'private',
           handleUploadUrl: '/api/presskits/upload',
-          contentType: f.type || undefined,
+          contentType,
         });
         tracks.push({
           blob_url: blob.url,
           filename: f.name,
-          mime_type: blob.contentType || f.type || 'application/octet-stream',
+          mime_type:
+            blob.contentType || contentType || 'application/octet-stream',
           size_bytes: f.size,
         });
       }
       setPhase('saving');
-      const res = await createPresskit({
-        artist_name: String(fd.get('artist_name') ?? ''),
-        recipient_name: String(fd.get('recipient_name') ?? ''),
-        recipient_org: String(fd.get('recipient_org') ?? ''),
-        greeting: String(fd.get('greeting') ?? ''),
-        pitch: String(fd.get('pitch') ?? ''),
-        tracks,
-      });
+      const res = await createPresskit({ ...input, tracks });
 
       if (!res.ok) {
-        setError('Failed to create presskit.');
+        setError(res.error || 'Failed to create presskit.');
+        if (res.fieldErrors) setFieldErrors(res.fieldErrors);
         setPhase('editing');
         return;
       }
@@ -137,8 +178,10 @@ export function CreatePresskitForm({
             defaultValue={defaultArtist}
             required
             maxLength={100}
+            aria-invalid={fieldErrors.artist_name ? 'true' : undefined}
             className="w-full rounded border border-background-300 bg-background-50 px-3 py-2 text-sm text-text-900 focus:border-primary-500 focus:outline-none"
           />
+          <FieldError message={fieldErrors.artist_name} />
         </label>
 
         <div className="grid gap-5 sm:grid-cols-2">
@@ -151,8 +194,10 @@ export function CreatePresskitForm({
               placeholder="e.g. Jordan at XL"
               required
               maxLength={100}
+              aria-invalid={fieldErrors.recipient_name ? 'true' : undefined}
               className="w-full rounded border border-background-300 bg-background-50 px-3 py-2 text-sm text-text-900 placeholder:text-text-400 focus:border-primary-500 focus:outline-none"
             />
+            <FieldError message={fieldErrors.recipient_name} />
           </label>
           <label className="grid gap-1.5">
             <span className="text-sm font-medium text-text-800">
@@ -163,8 +208,10 @@ export function CreatePresskitForm({
               name="recipient_org"
               placeholder="e.g. XL Recordings"
               maxLength={100}
+              aria-invalid={fieldErrors.recipient_org ? 'true' : undefined}
               className="w-full rounded border border-background-300 bg-background-50 px-3 py-2 text-sm text-text-900 placeholder:text-text-400 focus:border-primary-500 focus:outline-none"
             />
+            <FieldError message={fieldErrors.recipient_org} />
           </label>
         </div>
 
@@ -175,8 +222,10 @@ export function CreatePresskitForm({
             placeholder="Hi Jordan,"
             required
             maxLength={200}
+            aria-invalid={fieldErrors.greeting ? 'true' : undefined}
             className="w-full rounded border border-background-300 bg-background-50 px-3 py-2 text-sm text-text-900 placeholder:text-text-400 focus:border-primary-500 focus:outline-none"
           />
+          <FieldError message={fieldErrors.greeting} />
         </label>
 
         <label className="grid gap-1.5">
@@ -189,8 +238,10 @@ export function CreatePresskitForm({
             required
             maxLength={2000}
             rows={5}
+            aria-invalid={fieldErrors.pitch ? 'true' : undefined}
             className="w-full resize-y rounded border border-background-300 bg-background-50 px-3 py-2 text-sm text-text-900 placeholder:text-text-400 focus:border-primary-500 focus:outline-none"
           />
+          <FieldError message={fieldErrors.pitch} />
         </label>
 
         <label className="grid gap-1.5">
@@ -203,8 +254,10 @@ export function CreatePresskitForm({
             accept="audio/*"
             multiple
             required
+            aria-invalid={fieldErrors.songs ? 'true' : undefined}
             className="text-sm text-text-700 file:mr-3 file:rounded file:border-0 file:bg-background-200 file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-text-800 hover:file:bg-background-300"
           />
+          <FieldError message={fieldErrors.songs} />
         </label>
 
         {error && <p className="text-sm text-secondary-600">{error}</p>}

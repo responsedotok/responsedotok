@@ -5,6 +5,7 @@ import { sql } from '@/db/pool';
 import { getSessionCookie } from '@/lib/auth/sessions/cookies/get-session-cookie';
 import { getUserBySession } from '@/lib/auth/users/get-user-by-session';
 import { generatePresskitToken } from '@/lib/presskits/generate-presskit-token';
+import { validatePresskitForm } from '@/lib/presskits/validate-presskit-form';
 import type { CreateKitInput } from '@/lib/types/create-kit-input';
 import type { CreateKitResult } from '@/lib/types/create-kit-result';
 
@@ -19,6 +20,19 @@ export async function createPresskit(
   const sessionToken = await getSessionCookie();
   const user = sessionToken ? await getUserBySession(sessionToken) : null;
   if (!user) return { ok: false, error: 'You must be signed in.' };
+
+  if (input === null || typeof input !== 'object') {
+    return { ok: false, error: 'Please check the form and try again.' };
+  }
+
+  const fieldErrors = validatePresskitForm(input);
+  if (Object.keys(fieldErrors).length > 0) {
+    return {
+      ok: false,
+      error: 'Please fix the highlighted fields.',
+      fieldErrors,
+    };
+  }
 
   const parsed = presskitSchema.safeParse(input);
   if (!parsed.success) {
