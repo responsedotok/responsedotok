@@ -47,6 +47,17 @@ describe('createPresskit', () => {
     expect(mockBegin).not.toHaveBeenCalled();
   });
 
+  test('names the failing field when a text input is empty', async () => {
+    h.getSessionCookie.mockResolvedValue('tok');
+    h.getUserBySession.mockResolvedValue({ id: 'u1' });
+    const res = await createPresskit({ ...validInput, pitch: '  ' });
+    expect(res.ok).toBe(false);
+    if (!res.ok) {
+      expect(res.fieldErrors?.pitch).toMatch(/why you are a fit/i);
+    }
+    expect(mockBegin).not.toHaveBeenCalled();
+  });
+
   test('rejects an invalid form (e.g. 3 tracks) without touching the DB', async () => {
     h.getSessionCookie.mockResolvedValue('tok');
     h.getUserBySession.mockResolvedValue({ id: 'u1' });

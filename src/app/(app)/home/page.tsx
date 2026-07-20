@@ -17,14 +17,17 @@ export default async function HomePage() {
 
   if (kits.length === 0) {
     return (
-      <main className="mx-auto w-full max-w-5xl flex flex-1 flex-col items-center justify-center font-sans px-6 py-24">
-        <h1 className="m-0 text-text-200">Your first press kit</h1>
-        <p className="mt-5 max-w-md text-text-500">
+      <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-6 py-24 font-sans">
+        <h1 className="m-0 text-text-200">Build your first press kit</h1>
+        <p className="mt-5 max-w-md text-center text-text-500">
           A press kit is a private page you send to a label — your music, your
           story and your links, all in one place. Make one and share the link.
         </p>
-        <Link href="/create" className="mt-8">
-          <button type="submit">Create a press kit</button>
+        <Link
+          href="/create"
+          className="mt-10 rounded bg-primary-700 px-5 py-2.5 text-sm font-medium text-text-200 hover:bg-primary-600"
+        >
+          Create a press kit
         </Link>
       </main>
     );
